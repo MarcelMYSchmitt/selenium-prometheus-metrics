@@ -32,7 +32,9 @@ public class SeleniumPrometheusLoginTester {
 	@Value("${selenium.testing.landingUrl}")
 	private String landingUrl;
 	
-	@Scheduled(fixedRate = 200000)
+	
+    // we probe every 150 seconds
+	@Scheduled(fixedRate = 150000)
 	public void getTitle() throws InterruptedException {
 		
 		config = new SeleniumConfig();
@@ -40,7 +42,7 @@ public class SeleniumPrometheusLoginTester {
 		
 		webDriver = config.getDriver();
 		String url = this.config.getDriver().getTitle();
-		System.out.println(url);
+		System.out.println("Site Title: " + url);
 
 		TimeUnit.SECONDS.sleep(2);
 
@@ -87,10 +89,13 @@ public class SeleniumPrometheusLoginTester {
 			
 			seleniumPrometheusMetricDefinition.setLoginAvailabilityStatus(1);
 			TimeUnit.SECONDS.sleep(2);
+		} else {
+			System.out.println("Login seems not to be successful, setting Login Metric 'LOGIN_AVAILABILITY' to 0.");	
 
+			seleniumPrometheusMetricDefinition.setLoginAvailabilityStatus(0);
+			TimeUnit.SECONDS.sleep(2);
 		}
 		
 		webDriver.close();
-
 	}
 }

@@ -1,0 +1,23 @@
+version: "3.2"
+
+services:
+
+  spring-boot-metrics:
+    image: mrmyiagi/spring-boot-metrics
+    container_name: spring-boot-metrics
+    build:
+        context: .
+        dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 1234:8080
+    environment: 
+      - selenium.testing.startUrl: "startUrl"
+      - selenium.testing.username: "username"
+      - selenium.testing.userpassword: "userpassword"
+      - selenium.testing.landingUrl: "landingUrl"
+
+networks:
+  default:
+    external:
+      name: spring-boot-metrics-network
