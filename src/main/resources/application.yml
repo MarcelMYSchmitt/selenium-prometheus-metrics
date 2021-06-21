@@ -1,0 +1,13 @@
+server: 
+  port: 8080
+
+selenium.testing.startUrl: "startUrl"
+selenium.testing.username: "username"
+selenium.testing.userpassword: "userpassword"
+selenium.testing.landingUrl: "landing_page_url"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"    
